@@ -1,0 +1,26 @@
+::-webkit-scrollbar {
+  width: 0;
+}
+
+#app-wrapper {
+  display: grid;
+  margin: 0 auto;
+  max-width: 1200px;
+  grid-template-areas:
+    "head head"
+    "nav cont"
+    /* "nav dialog" */
+    "foot foot";
+  grid-template-rows: 220px 1fr;
+  grid-template-columns: 2fr 12fr;
+  /* grid-gap: 10px; */
+  border: solid;
+  border-color: rgb(0, 217, 255);
+}
+
+.app-wrapper-content {
+  grid-area: cont;
+  background-color: #6ea1ff;
+  border: solid;
+  border-color: rgb(2, 255, 36);
+}

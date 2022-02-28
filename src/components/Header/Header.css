@@ -1,0 +1,11 @@
+#app-wrapper > header {
+  grid-area: head;
+  max-height: 220px;
+  background-color: #3d9970;
+  border: solid;
+  border-color: red;
+}
+
+#app-wrapper > header img {
+  width: 170px;
+}

@@ -1,0 +1,6 @@
+#app-wrapper > footer {
+  grid-area: foot;
+  background-color: #8cffa0;
+  border: solid;
+  border-color: rgb(64, 10, 192);
+}

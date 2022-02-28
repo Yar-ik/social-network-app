@@ -1,0 +1,50 @@
+#app-wrapper > nav {
+  grid-area: nav;
+  background-color: #f012be;
+  border: solid;
+  border-color: rgb(230, 220, 94);
+}
+
+a {
+  display: inline-block;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 15px 25px;
+  padding: 15px 20px;
+  font-size: 15px;
+  font-weight: bold;
+  font-family: "Montserrat", sans-serif;
+  transition: 0.4s ease-in-out;
+}
+
+.item a {
+  color: #34495e;
+  line-height: 1.2;
+  position: relative;
+  padding: 0 14px;
+  text-transform: uppercase;
+}
+.item a:after {
+  content: "";
+  height: 100%;
+  min-width: 4px;
+  background: #34495e;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  transition: 0.5s;
+}
+
+.item a:hover:after {
+  min-width: 100%;
+  background: #95a5a6;
+  opacity: 0.35;
+}
+
+.item a:focus {
+  color: rgba(3, 119, 214, 0.671);
+}
+.item a:disabled {
+  color: gray;
+}
