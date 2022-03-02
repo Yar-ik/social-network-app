@@ -28,7 +28,6 @@ let store = {
     sideBar: {},
   },
   getState() {
-    debugger;
     return this._state;
   },
   _callSubscriber() {
