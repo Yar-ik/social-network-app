@@ -1,3 +1,5 @@
+/** @format */
+
 let store = {
   _state: {
     profilePage: {
@@ -27,11 +29,11 @@ let store = {
     },
     sideBar: {},
   },
-  getState() {
-    return this._state;
-  },
   _callSubscriber() {
     console.log("State changed");
+  },
+  getState() {
+    return this._state;
   },
   addPost() {
     debugger;
