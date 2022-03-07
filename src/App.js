@@ -1,3 +1,5 @@
+/** @format */
+
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
@@ -18,10 +20,18 @@ const App = (props) => {
         <Nav />
         <div className="app-wrapper-content">
           <Routes>
-            <Route path="dialogs" element={<Dialogs state={props.state.dialogsPage} />} />
+            <Route
+              path="dialogs"
+              element={<Dialogs state={props.state.dialogsPage} />}
+            />
             <Route
               path="profile"
-              element={<Main profilePage={props.state.profilePage} addPost={props.addPost} updateNewPostText={props.updateNewPostText} />}
+              element={
+                <Main
+                  profilePage={props.state.profilePage}
+                  dispatch={props.dispatch}
+                />
+              }
             />
             <Route path="news" element={<News />} />
             <Route path="music" element={<Music />} />
