@@ -1,6 +1,6 @@
 /** @format */
-
-const sidebarReducer = (state, action) => {
+let inicialState = {};
+const sidebarReducer = (state = inicialState, action) => {
   return state;
 };
 
