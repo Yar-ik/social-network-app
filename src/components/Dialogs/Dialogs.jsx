@@ -4,15 +4,9 @@ import React from "react";
 import DialogItem from "./Dialogitem/DialogItem";
 import "./Dialogs.css";
 import Message from "./Message/Message";
-// import store from "./../../redux/state";
-
-import {
-  sendMessageActionCreator,
-  updateNewMessageBodyActionCreator,
-} from "../../redux/dialogs-reducer";
 
 const Dialogs = (props) => {
-  let state = props.store.getState().dialogsPage;
+  let state = props.dialogsPage;
 
   let dialogsElements = state.dialogs.map((dialog) => (
     <DialogItem name={dialog.name} id={dialog.id} />
@@ -24,11 +18,11 @@ const Dialogs = (props) => {
   let newMessageBody = state.newMessageBody;
 
   let onSendMessageClick = () => {
-    props.store.dispatch(sendMessageActionCreator());
+    props.sendMessage();
   };
   let onNewMessageChange = (event) => {
     let body = event.target.value;
-    props.store.dispatch(updateNewMessageBodyActionCreator(body));
+    props.updateNewMessageBody(body);
 
     // подготовка к передаче в store написанного текста (body) в textarea
   };
