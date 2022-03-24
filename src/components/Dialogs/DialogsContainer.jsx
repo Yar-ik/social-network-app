@@ -1,6 +1,5 @@
 /** @format */
 
-import React from "react";
 import "./Dialogs.css";
 import Dialogs from "./Dialogs";
 import {
@@ -8,25 +7,25 @@ import {
   updateNewMessageBodyActionCreator,
 } from "../../redux/dialogs-reducer";
 
-const DialogsContainer = (props) => {
-  let state = props.store.getState().dialogsPage;
+import { connect } from "react-redux";
 
-  let onSendMessageClick = () => {
-    props.store.dispatch(sendMessageActionCreator());
+let mapStateToProps = (state) => {
+  return {
+    dialogsPage: state.dialogsPage,
   };
-  let onNewMessageChange = (body) => {
-    props.store.dispatch(updateNewMessageBodyActionCreator(body));
-
-    // подготовка к передаче в store написанного текста (body) в textarea
-  };
-
-  return (
-    <Dialogs
-      updateNewMessageBody={onNewMessageChange}
-      sendMessage={onSendMessageClick}
-      dialogsPage={state}
-    />
-  );
 };
+
+let mapDispatchToProps = (dispatch) => {
+  return {
+    updateNewMessageBody: () => {
+      dispatch(sendMessageActionCreator());
+    },
+    sendMessage: (body) => {
+      dispatch(updateNewMessageBodyActionCreator(body));
+    },
+  };
+};
+
+const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs);
 
 export default DialogsContainer;

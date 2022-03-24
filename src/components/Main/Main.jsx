@@ -7,11 +7,10 @@ import MainInfo from "./MainInfo/MainInfo";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 
 const Main = (props) => {
-  debugger;
   return (
     <main>
       <MainInfo />
-      <MyPostsContainer store={props.store} />
+      <MyPostsContainer />
     </main>
   );
 };
