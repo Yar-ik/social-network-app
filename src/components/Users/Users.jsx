@@ -1,7 +1,9 @@
 /** @format */
 
+import axios from "axios";
 import React from "react";
 import styles from "./users.module.css";
+import userPhoto from "../../assets/images/6481225432795d8cdf48f0f85800cf66.jpg";
 let users = [
   {
     id: 1,
@@ -33,7 +35,12 @@ let users = [
 ];
 let Users = (props) => {
   if (props.users.length === 0) {
-    props.setUsers(users);
+    axios
+      .get("https://social-network.samuraijs.com/api/1.0/users") // Запрос //
+      .then((response) => {
+        // Ответ //
+        props.setUsers(response.data.items);
+      });
   }
   // в пропсах сюда приходят пользователи //
 
@@ -43,7 +50,10 @@ let Users = (props) => {
         <div key={user.id}>
           <span>
             <div>
-              <img src={user.photoUrl} className={styles.userPhoto} />
+              <img
+                src={user.photos.small != null ? user.photos.small : userPhoto}
+                className={styles.userPhoto}
+              />
             </div>
             <div>
               {user.followed ? (
@@ -67,12 +77,12 @@ let Users = (props) => {
           </span>
           <span>
             <span>
-              <div>{user.fullName}</div>
+              <div>{user.name}</div>
               <div>{user.status}</div>
             </span>
             <span>
-              <div>{user.location.country}</div>
-              <div>{user.location.city}</div>
+              <div>{"user.location.country"}</div>
+              <div>{"user.location.city"}</div>
             </span>
           </span>
         </div>
