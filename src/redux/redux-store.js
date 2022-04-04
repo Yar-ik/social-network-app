@@ -1,5 +1,4 @@
 /** @format */
-import React from "react";
 
 import { combineReducers, createStore } from "redux";
 import profileReducer from "./profile-reducer";
@@ -14,7 +13,10 @@ let reducers = combineReducers({
   usersPage: usersReducer,
 });
 
-let store = createStore(reducers);
+let store = createStore(
+  reducers,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 
 window.store = store;
 

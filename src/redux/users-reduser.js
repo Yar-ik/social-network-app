@@ -3,35 +3,7 @@ const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UNFOLLOW";
 const SET_USERS = "SET-USERS";
 let inicialState = {
-  users: [
-    // {
-    //   id: 1,
-    //   photoUrl:
-    //     "https://www.vokrug.tv/pic/person/2/b/f/4/2bf448098b7badf3b37e87c510da29bc.jpeg",
-    //   followed: false,
-    //   fullName: "Yaroslav",
-    //   likestatus: "I am a boss",
-    //   location: { city: "Belgorod", country: "Russia" },
-    // },
-    // {
-    //   id: 2,
-    //   photoUrl:
-    //     "https://www.vokrug.tv/pic/person/2/b/f/4/2bf448098b7badf3b37e87c510da29bc.jpeg",
-    //   fullName: "Vasya",
-    //   followed: true,
-    //   likestatus: "I am a boss too",
-    //   location: { city: "Kursk", country: "Russia" },
-    // },
-    // {
-    //   id: 3,
-    //   photoUrl:
-    //     "https://www.vokrug.tv/pic/person/2/b/f/4/2bf448098b7badf3b37e87c510da29bc.jpeg",
-    //   followed: false,
-    //   fullName: "Sasha",
-    //   likestatus: "I am a boss too",
-    //   location: { city: "Moscow", country: "Russia" },
-    // },
-  ],
+  users: [],
 };
 
 const usersReducer = (state = inicialState, action) => {
