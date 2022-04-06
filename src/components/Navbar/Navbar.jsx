@@ -1,3 +1,5 @@
+/** @format */
+
 import React from "react";
 import "./Navbar.css";
 import { Link } from "react-router-dom";
@@ -10,6 +12,9 @@ const Nav = () => {
       </div>
       <div className="item">
         <Link to="dialogs">Messages</Link>
+      </div>
+      <div className="item">
+        <Link to="users">Users</Link>
       </div>
       <div className="item">
         <Link to="news">News</Link>
