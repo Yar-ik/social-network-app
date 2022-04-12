@@ -8,7 +8,8 @@ import userPhoto from "../../assets/images/6481225432795d8cdf48f0f85800cf66.jpg"
 class Users extends React.Component {
   constructor(props) {
     super(props);
-    alert("NEW");
+  }
+  componentDidMount() {
     axios
       .get("https://social-network.samuraijs.com/api/1.0/users") // Запрос //
       .then((response) => {
