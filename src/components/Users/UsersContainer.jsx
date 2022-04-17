@@ -14,6 +14,8 @@ let mapStateToProps = (state) => {
   return {
     users: state.usersPage.users,
     // возвращает список всех пользователей из стейта //
+    pageSize: state.usersPage.pageSize,
+    totalUsersCount: state.usersPage.totalUsersCount,
   };
 };
 let mapDispatchToProps = (dispatch) => {
