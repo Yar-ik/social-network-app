@@ -1,79 +1,77 @@
 /** @format */
 
-import axios from "axios";
 import React from "react";
 import styles from "./users.module.css";
 import userPhoto from "../../assets/images/6481225432795d8cdf48f0f85800cf66.jpg";
 
-class Users extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-  componentDidMount() {
-    axios
-      .get("https://social-network.samuraijs.com/api/1.0/users") // Запрос //
-      .then((response) => {
-        // Ответ //
-        this.props.setUsers(response.data.items);
-      });
-  }
+let Users = (props) => {
+  let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
 
-  render() {
-    return (
-      <div>
-        <div>
-          <span>1</span>
-          <span className={styles.selectedPage}>2</span>
-          <span>3</span>
-          <span>4</span>
-          <span>5</span>
-        </div>
-        {this.props.users.map((user) => (
-          <div key={user.id}>
-            <span>
-              <div>
-                <img
-                  src={
-                    user.photos.small != null ? user.photos.small : userPhoto
-                  }
-                  className={styles.userPhoto}
-                />
-              </div>
-              <div>
-                {user.followed ? (
-                  <button
-                    onClick={() => {
-                      this.props.unfollow(user.id);
-                    }}
-                  >
-                    UnFollow
-                  </button>
-                ) : (
-                  <button
-                    onClick={() => {
-                      this.props.follow(user.id);
-                    }}
-                  >
-                    Follow
-                  </button>
-                )}
-              </div>
-            </span>
-            <span>
-              <span>
-                <div>{user.name}</div>
-                <div>{user.status}</div>
-              </span>
-              <span>
-                <div>{"user.location.country"}</div>
-                <div>{"user.location.city"}</div>
-              </span>
-            </span>
-          </div>
-        ))}
-      </div>
-    );
+  let pages = [];
+  for (let i = 1; i <= pagesCount; i++) {
+    pages.push(i);
   }
-}
+  return (
+    <div>
+      <div>
+        {pages.map((p) => {
+          return (
+            <span
+              className={props.currentPage === p && styles.selectedPage}
+              onClick={(e) => {
+                props.onPageChanged(p);
+              }}
+              style={{ cursor: "pointer" }}
+            >
+              {p}
+            </span>
+          );
+        })}
+      </div>
+      {props.users.map((u) => (
+        <div key={u.id}>
+          <span>
+            <div>
+              <img
+                src={u.photos.small != null ? u.photos.small : userPhoto}
+                alt={"avatar"}
+                className={styles.userPhoto}
+              />
+            </div>
+            <div>
+              {u.followed ? (
+                <button
+                  onClick={() => {
+                    props.unfollow(u.id);
+                  }}
+                >
+                  UnFollow
+                </button>
+              ) : (
+                <button
+                  onClick={() => {
+                    props.follow(u.id);
+                  }}
+                >
+                  Follow
+                </button>
+              )}
+            </div>
+          </span>
+          <span>
+            <span>
+              <div>{u.name}</div>
+              <div>{u.status}</div>
+            </span>
+            <span>
+              <div>{"user.location.country"}</div>
+              <div>{"user.location.city"}</div>
+            </span>
+          </span>
+        </div>
+      ))}
+    </div>
+  );
+};
 
 export default Users;
