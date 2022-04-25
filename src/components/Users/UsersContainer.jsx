@@ -11,7 +11,7 @@ import {
 } from "./../../redux/users-reduser";
 import axios from "axios";
 import Users from "./Users";
-
+import preloader from "../../assets/images/loading-100.gif";
 class UsersContainer extends React.Component {
   // constructor(props) {
   //   super(props);
@@ -42,15 +42,18 @@ class UsersContainer extends React.Component {
 
   render() {
     return (
-      <Users
-        totalUsersCount={this.props.totalUsersCount}
-        pageSize={this.props.pageSize}
-        currentPage={this.props.currentPage}
-        onPageChanged={this.onPageChanged}
-        users={this.props.users}
-        unfollow={this.props.unfollow}
-        follow={this.props.follow}
-      />
+      <>
+        {this.props.isFetching ? <img src={preloader} /> : null}
+        <Users
+          totalUsersCount={this.props.totalUsersCount}
+          pageSize={this.props.pageSize}
+          currentPage={this.props.currentPage}
+          onPageChanged={this.onPageChanged}
+          users={this.props.users}
+          unfollow={this.props.unfollow}
+          follow={this.props.follow}
+        />
+      </>
     );
   }
 }
@@ -63,6 +66,7 @@ let mapStateToProps = (state) => {
     pageSize: state.usersPage.pageSize,
     totalUsersCount: state.usersPage.totalUsersCount,
     currentPage: state.usersPage.currentPage,
+    isFetching: state.usersPage.isFetching,
   };
 };
 let mapDispatchToProps = (dispatch) => {
