@@ -1,18 +1,17 @@
 /** @format */
 
 import React from "react";
-import "./Main.css";
 // import MyPosts from "./MyPosts/MyPosts";
-import MainInfo from "./MainInfo/MainInfo";
+import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 
-const Main = (props) => {
+const Profile = (props) => {
   return (
-    <main>
-      <MainInfo />
+    <div>
+      <ProfileInfo profil={props.profile} />
       <MyPostsContainer />
-    </main>
+    </div>
   );
 };
 
-export default Main;
+export default Profile;

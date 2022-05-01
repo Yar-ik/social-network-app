@@ -1,3 +1,5 @@
+/** @format */
+
 #app-wrapper > main {
   grid-area: main;
   background-color: #6ea1ff;
@@ -5,7 +7,7 @@
   border-color: rgb(2, 255, 36);
 }
 
-.main-img img {
+.profile-img img {
   display: inline-block;
   width: 100%;
 }
