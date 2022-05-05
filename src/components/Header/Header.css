@@ -1,3 +1,5 @@
+/** @format */
+
 #app-wrapper > header {
   grid-area: head;
   max-height: 220px;
@@ -8,4 +10,12 @@
 
 #app-wrapper > header img {
   width: 170px;
+}
+
+.login-block {
+  float: right;
+}
+
+.login-block a {
+  color: white;
 }

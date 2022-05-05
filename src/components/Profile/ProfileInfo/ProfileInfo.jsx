@@ -12,10 +12,13 @@ const ProfileInfo = (props) => {
   return (
     <div>
       <div className="profile-img">
-        <img src="https://mircanada.ru/wp-content/uploads/2019/05/sfinks1.jpg" />
+        <img
+          src="https://mircanada.ru/wp-content/uploads/2019/05/sfinks1.jpg"
+          alt=""
+        />
       </div>
       <div className="discriptionBlok">
-        <img src={props.profile.photos.large} />
+        <img src={props.profile.photos.large} alt="" />
         ava + discription
       </div>
     </div>
