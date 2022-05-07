@@ -10,40 +10,35 @@ import {
   setTotalUsersCount,
   toggleIsFetching,
 } from "./../../redux/users-reduser";
-import axios from "axios";
+// import axios from "axios";
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
 // import preloader from "../../assets/images/loading-100.gif";
+import { usersAPI } from "./../../api/api";
+
 class UsersContainer extends React.Component {
-  // constructor(props) {
-  //   super(props);
-  // }
   componentDidMount() {
     this.props.toggleIsFetching(true);
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`
-      ) // Запрос //
-      .then((response) => {
+
+    usersAPI
+      .getUsers(this.props.currentPage, this.props.pageSize)
+      .then((data) => {
         // Ответ //
         this.props.toggleIsFetching(false);
-        this.props.setUsers(response.data.items);
-        this.props.setTotalUsersCount(response.data.totalCount);
+        this.props.setUsers(data.items);
+        this.props.setTotalUsersCount(data.totalCount);
       });
   }
 
   onPageChanged = (pageNumber) => {
     this.props.setCurrentPage(pageNumber);
     this.props.toggleIsFetching(true);
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`
-      ) // Запрос //
-      .then((response) => {
-        // Ответ //
-        this.props.toggleIsFetching(false);
-        this.props.setUsers(response.data.items);
-      });
+
+    usersAPI.getUsers(pageNumber, this.props.pageSize).then((data) => {
+      // Ответ //
+      this.props.toggleIsFetching(false);
+      this.props.setUsers(data.items);
+    });
   };
 
   render() {
@@ -75,28 +70,6 @@ let mapStateToProps = (state) => {
     isFetching: state.usersPage.isFetching,
   };
 };
-// let mapDispatchToProps = (dispatch) => {
-//   return {
-//     follow: (userId) => {
-//       dispatch(followActionCreator(userId));
-//     },
-//     unfollow: (userId) => {
-//       dispatch(unfollowActionCreator(userId));
-//     },
-//     setUsers: (users) => {
-//       dispatch(setUsersActionCreator(users));
-//     },
-//     setCurrentPage: (pageNumber) => {
-//       dispatch(setCurrentPageActionCreator(pageNumber));
-//     },
-//     setTotalUsersCount: (totalCount) => {
-//       dispatch(setUsersTotalCountActionCreator(totalCount));
-//     },
-//     toggleIsFetching: (isFetching) => {
-//       dispatch(toggleIsFetchingActionCreator(isFetching)); // диспатчим вызов ActionCreator (объект) //
-//     },
-//   }; // Передовать дочерней, презентационной, компоненте колбэки //
-// };
 
 export default connect(mapStateToProps, {
   follow,
