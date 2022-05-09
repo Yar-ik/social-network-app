@@ -15,6 +15,7 @@ import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
 // import preloader from "../../assets/images/loading-100.gif";
 import { usersAPI } from "./../../api/api";
+import { toggleFollowingProgress } from "./../../redux/users-reduser";
 
 class UsersContainer extends React.Component {
   componentDidMount() {
@@ -53,6 +54,8 @@ class UsersContainer extends React.Component {
           users={this.props.users}
           unfollow={this.props.unfollow}
           follow={this.props.follow}
+          toggleFollowingProgress={this.props.toggleFollowingProgress}
+          followingInProgress={this.props.followingInProgress}
         />
       </>
     );
@@ -62,12 +65,13 @@ class UsersContainer extends React.Component {
 let mapStateToProps = (state) => {
   // Функция которая принимает глобальный стейт всего приложения //
   return {
-    users: state.usersPage.users,
     // возвращает список всех пользователей из стейта //
+    users: state.usersPage.users,
     pageSize: state.usersPage.pageSize,
     totalUsersCount: state.usersPage.totalUsersCount,
     currentPage: state.usersPage.currentPage,
     isFetching: state.usersPage.isFetching,
+    followingInProgress: state.usersPage.followingInProgress,
   };
 };
 
@@ -77,5 +81,7 @@ export default connect(mapStateToProps, {
   setUsers,
   setCurrentPage,
   setTotalUsersCount,
-  toggleIsFetching, // диспатчим вызов ActionCreator (объект) //
+  toggleIsFetching,
+  toggleFollowingProgress,
+  // диспатчим вызов ActionCreator (объект) //
 })(UsersContainer);
