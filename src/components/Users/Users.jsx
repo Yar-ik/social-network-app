@@ -6,6 +6,7 @@ import userPhoto from "../../assets/images/6481225432795d8cdf48f0f85800cf66.jpg"
 import { NavLink } from "react-router-dom";
 import axios from "axios";
 // import { toggleFollowingProgress } from "./../../redux/users-reduser";
+import { usersAPI } from "./../../api/api";
 
 let Users = (props) => {
   let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
@@ -22,7 +23,6 @@ let Users = (props) => {
             <span
               className={props.currentPage === p && styles.selectedPage}
               onClick={(e) => {
-                debugger;
                 props.onPageChanged(p);
               }}
               style={{ cursor: "pointer" }}
@@ -49,25 +49,7 @@ let Users = (props) => {
                 <button
                   disabled={props.followingInProgress.some((id) => id === u.id)}
                   onClick={() => {
-                    debugger;
-                    props.toggleFollowingProgress(true, u.id);
-                    axios
-                      .delete(
-                        `https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
-                        {
-                          withCredentials: true,
-                          headers: {
-                            "API-KEY": "002283c6-beab-441c-8cf7-1d2dff045dbc",
-                          },
-                        }
-                      ) // Запрос //
-                      .then((response) => {
-                        // Ответ //
-                        if (response.data.resultCode == 0) {
-                          props.unfollow(u.id);
-                        }
-                        props.toggleFollowingProgress(false, u.id);
-                      });
+                    props.unfollow(u.id);
                   }}
                 >
                   Unfollow
@@ -76,26 +58,7 @@ let Users = (props) => {
                 <button
                   disabled={props.followingInProgress.some((id) => id === u.id)}
                   onClick={() => {
-                    debugger;
-                    props.toggleFollowingProgress(true, u.id);
-                    axios
-                      .post(
-                        `https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
-                        {},
-                        {
-                          withCredentials: true,
-                          headers: {
-                            "API-KEY": "002283c6-beab-441c-8cf7-1d2dff045dbc",
-                          },
-                        }
-                      ) // Запрос //
-                      .then((response) => {
-                        // Ответ //
-                        if (response.data.resultCode == 0) {
-                          props.follow(u.id);
-                        }
-                        props.toggleFollowingProgress(false, u.id);
-                      });
+                    props.follow(u.id);
                   }}
                 >
                   Follow

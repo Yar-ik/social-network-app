@@ -1,4 +1,5 @@
 /** @format */
+import { usersAPI } from "./../api/api";
 const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UNFOLLOW";
 const SET_USERS = "SET_USERS";
@@ -23,7 +24,7 @@ const usersReducer = (state = inicialState, action) => {
         // users: [...state.users]
         users: state.users.map((u) => {
           if (u.id === action.userId) {
-            return { ...u, folliwed: true };
+            return { ...u, followed: true };
           }
           return u;
         }),
@@ -35,7 +36,7 @@ const usersReducer = (state = inicialState, action) => {
         // users: [...state.users]
         users: state.users.map((u) => {
           if (u.id === action.userId) {
-            return { ...u, folliwed: false };
+            return { ...u, followed: false };
           }
           return u;
         }),
@@ -68,8 +69,9 @@ const usersReducer = (state = inicialState, action) => {
   }
 };
 
-export const follow = (userId) => ({ type: FOLLOW, userId });
-export const unfollow = (userId) => ({ type: UNFOLLOW, userId });
+//  экшн криэторы //
+export const followSuccess = (userId) => ({ type: FOLLOW, userId });
+export const unfollowSuccess = (userId) => ({ type: UNFOLLOW, userId });
 export const setUsers = (users) => ({ type: SET_USERS, users });
 export const setCurrentPage = (currentPage) => ({
   type: SET_CURRENT_PAGE,
@@ -89,4 +91,46 @@ export const toggleFollowingProgress = (isFetching, userId) => ({
   userId: userId,
 });
 
+export const getUsersThunkCreator = (currentPage, pageSize) => {
+  return (dispatch) => {
+    dispatch(toggleIsFetching(true));
+
+    usersAPI.getUsers(currentPage, pageSize).then((data) => {
+      // Ответ //
+      dispatch(toggleIsFetching(false));
+      dispatch(setUsers(data.items));
+      dispatch(setTotalUsersCount(data.totalCount));
+    });
+  };
+};
+
+export const follow = (userId) => {
+  return (dispatch) => {
+    dispatch(toggleFollowingProgress(true, userId));
+    usersAPI
+      .follow(userId) // Запрос //
+      .then((response) => {
+        // Ответ //
+        if (response.data.resultCode === 0) {
+          dispatch(followSuccess(userId));
+        }
+        dispatch(toggleFollowingProgress(false, userId));
+      });
+  };
+};
+
+export const unfollow = (userId) => {
+  return (dispatch) => {
+    dispatch(toggleFollowingProgress(true, userId));
+    usersAPI
+      .unfollow(userId) // Запрос //
+      .then((response) => {
+        // Ответ //
+        if (response.data.resultCode === 0) {
+          dispatch(unfollowSuccess(userId));
+        }
+        dispatch(toggleFollowingProgress(false, userId));
+      });
+  };
+};
 export default usersReducer;
