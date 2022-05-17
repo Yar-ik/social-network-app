@@ -20,14 +20,19 @@ export const usersAPI = {
   },
 
   follow(userId) {
-    return instance.post(
-      `https://social-network.samuraijs.com/api/1.0/follow/${userId}`
-    );
+    return instance.post(`follow/${userId}`);
     // Запрос //
   },
   unfollow(userId) {
-    return instance.delete(
-      `https://social-network.samuraijs.com/api/1.0/follow/${userId}`
-    ); // Запрос //
+    return instance.delete(`follow/${userId}`); // Запрос //
+  },
+  getProfile(userId) {
+    return instance.get(`profile/` + userId); // Запрос //
+  },
+};
+
+export const authAPI = {
+  me() {
+    return instance.get(`auth/me`);
   },
 };
