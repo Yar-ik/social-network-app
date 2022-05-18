@@ -4,6 +4,7 @@ import React from "react";
 import DialogItem from "./Dialogitem/DialogItem";
 import "./Dialogs.css";
 import Message from "./Message/Message";
+import { Link } from "react-router-dom";
 
 const Dialogs = (props) => {
   let state = props.dialogsPage;
@@ -26,6 +27,9 @@ const Dialogs = (props) => {
 
     // подготовка к передаче в store написанного текста (body) в textarea
   };
+
+  if (!props.isAuth) return <Link to="/login" />;
+  //  alert(props.isAuth)
 
   return (
     <>

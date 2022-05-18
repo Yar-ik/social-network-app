@@ -3,11 +3,11 @@
 import React, { useEffect } from "react";
 import Profile from "./Profile";
 import { connect } from "react-redux";
-
-import { setUserProfile } from "./../../redux/profile-reducer";
 import { useParams } from "react-router-dom";
 // import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { usersAPI } from "./../../api/api";
+// import { usersAPI } from "./../../api/api";
+import { getUserProfile } from "./../../redux/profile-reducer";
+import { Link } from "react-router-dom";
 
 const ProfileContainer = (props) => {
   const params = useParams();
@@ -16,21 +16,22 @@ const ProfileContainer = (props) => {
     if (!userId) {
       userId = 2;
     }
-    usersAPI.getProfile(userId).then((response) => {
-      // Ответ //
-      props.setUserProfile(response.data);
-    });
+    props.getUserProfile(userId);
   }, []);
-
-  return (
-    <>
-      <Profile {...props} profile={props.profile} />
-    </>
-  );
+  if (!props.isAuth) {
+    return <Link to="/login" />;
+  } else {
+    return (
+      <>
+        <Profile {...props} profile={props.profile} />
+      </>
+    );
+  }
 };
 
 let mapStateToProps = (state) => ({
   profile: state.profilePage.profile,
+  isAuth: state.auth.isAuth,
 });
 
-export default connect(mapStateToProps, { setUserProfile })(ProfileContainer);
+export default connect(mapStateToProps, { getUserProfile })(ProfileContainer);
