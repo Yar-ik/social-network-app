@@ -14,6 +14,7 @@ import Preloader from "../common/Preloader/Preloader";
 // import preloader from "../../assets/images/loading-100.gif";
 import { usersAPI } from "./../../api/api";
 import { toggleFollowingProgress } from "./../../redux/users-reduser";
+import { withAuthRedirect } from "./../../hoc/withAuthRedirect";
 
 class UsersContainer extends React.Component {
   componentDidMount() {
@@ -56,6 +57,8 @@ let mapStateToProps = (state) => {
   };
 };
 
+let withRedirect = withAuthRedirect(UsersContainer);
+
 export default connect(mapStateToProps, {
   follow,
   unfollow,
@@ -63,4 +66,4 @@ export default connect(mapStateToProps, {
   toggleFollowingProgress,
   getUsers: getUsersThunkCreator,
   // диспатчим вызов ActionCreator (объект) //
-})(UsersContainer);
+})(withRedirect);
