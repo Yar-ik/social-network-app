@@ -3,6 +3,7 @@
 import React from "react";
 import Preloader from "../../common/Preloader/Preloader";
 import "./ProfileInfo.css";
+import ProfileStatus from "./ProfileStatus";
 
 const ProfileInfo = (props) => {
   if (!props.profile) {
@@ -11,15 +12,15 @@ const ProfileInfo = (props) => {
 
   return (
     <div>
-      <div className="profile-img">
+      {/* <div className="profile-img">
         <img
           src="https://mircanada.ru/wp-content/uploads/2019/05/sfinks1.jpg"
           alt=""
         />
-      </div>
+      </div> */}
       <div className="discriptionBlok">
         <img src={props.profile.photos.large} alt="" />
-        ava + discription
+        <ProfileStatus status={"Hello my friends!"} />
       </div>
     </div>
   );
