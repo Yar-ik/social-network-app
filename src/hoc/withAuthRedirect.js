@@ -1,8 +1,8 @@
 /** @format */
 
 import React from "react";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import connect from "./../components/Users/UsersContainer";
 
 let mapStateToPropsFoRedirect = (state) => ({
   isAuth: state.auth.isAuth,

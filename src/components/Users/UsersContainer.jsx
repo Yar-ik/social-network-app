@@ -12,7 +12,7 @@ import {
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
 // import preloader from "../../assets/images/loading-100.gif";
-import { usersAPI } from "./../../api/api";
+// import { usersAPI } from "./../../api/api";
 import { toggleFollowingProgress } from "./../../redux/users-reduser";
 import { withAuthRedirect } from "./../../hoc/withAuthRedirect";
 import { compose } from "redux";
