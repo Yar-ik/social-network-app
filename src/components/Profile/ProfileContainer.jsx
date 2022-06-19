@@ -4,7 +4,6 @@ import Profile from "./Profile";
 import { connect } from "react-redux";
 import { getUserProfile } from "./../../redux/profile-reducer";
 import { useParams } from "react-router-dom";
-// import { withAuthRedirect } from "./../../hoc/withAuthRedirect";
 import { compose } from "redux";
 
 const ProfileContainer = (props) => {
@@ -12,7 +11,7 @@ const ProfileContainer = (props) => {
 
   useEffect(() => {
     if (!userId) {
-      userId = 2;
+      // userId = 2;
     }
     props.getUserProfile(userId);
   }, []);
